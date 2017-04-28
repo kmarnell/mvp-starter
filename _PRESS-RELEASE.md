@@ -18,12 +18,15 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Habit-Tracker
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  Anyone and everyone!
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  Create a list of habits you'd like to establish and keep yourself accountable 
 
 ## Problem ##
   > Describe the problem your product solves.

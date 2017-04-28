@@ -1,22 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import AddHabit from './components/AddHabit.jsx';
+import HabitList from './components/HabitList.jsx';
+
+const habits = [
+  {habit: 'Exercise'}, 
+  {habit: 'Meditate'} 
+];
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { 
-      items: []
+      habits: []
     }
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/items', 
+      url: '/habits', 
       success: (data) => {
         this.setState({
-          items: data
+          habits: data
         })
       },
       error: (err) => {
@@ -27,8 +35,9 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+      <h1>Habit Tracker</h1>
+      <AddHabit />
+      <HabitList habits={this.state.habits}/>
     </div>)
   }
 }
