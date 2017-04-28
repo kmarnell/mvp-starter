@@ -4,11 +4,6 @@ import $ from 'jquery';
 import AddHabit from './components/AddHabit.jsx';
 import HabitList from './components/HabitList.jsx';
 
-const habits = [
-  {habit: 'Exercise'}, 
-  {habit: 'Meditate'} 
-];
-
 
 class App extends React.Component {
   constructor(props) {
@@ -16,28 +11,40 @@ class App extends React.Component {
 
     this.state = { 
       habits: []
+      // isChecked: false
     }
+    this.handleAddHabit = this.handleAddHabit.bind(this)
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/habits', 
-      success: (data) => {
-        this.setState({
-          habits: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  // componentDidMount() {
+  //   $.ajax({
+  //     url: '/habits', 
+  //     success: (data) => {
+  //       this.setState({
+  //         habits: data
+  //       })
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     }
+  //   });
+  // }
+
+  
+  handleAddHabit(habit) {
+    var habitArr = [habit]
+    this.setState({
+      habits: this.state.habits.concat(habitArr)
+    })
   }
+
+
 
   render () {
     return (<div>
       <h1>Habit Tracker</h1>
-      <AddHabit />
-      <HabitList habits={this.state.habits}/>
+      <AddHabit handleAddHabit={this.handleAddHabit} />
+      <HabitList habitlist={this.state.habits} />
     </div>)
   }
 }
