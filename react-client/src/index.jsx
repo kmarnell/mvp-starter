@@ -10,10 +10,11 @@ class App extends React.Component {
     super(props);
 
     this.state = { 
-      habits: []
-      // isChecked: false
+      habits: [],
+      isCompleted: false,
     }
-    this.handleAddHabit = this.handleAddHabit.bind(this)
+    this.handleAddHabit = this.handleAddHabit.bind(this);
+    this.toggleCompleted = this.toggleCompleted.bind(this);
   }
 
   // componentDidMount() {
@@ -39,12 +40,18 @@ class App extends React.Component {
   }
 
 
+  toggleCompleted() {
+    this.setState({
+      isCompleted: !this.state.isCompleted
+    });
+  }
+ 
 
   render () {
     return (<div>
       <h1>Habit Tracker</h1>
       <AddHabit handleAddHabit={this.handleAddHabit} />
-      <HabitList habitlist={this.state.habits} />
+      <HabitList habitlist={this.state.habits} toggleCompleted={this.toggleCompleted} isCompleted={this.state.isCompleted}/>
     </div>)
   }
 }

@@ -9548,7 +9548,6 @@ var AddHabit = function (_React$Component) {
 
     _this.state = {
       value: ''
-
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -9618,7 +9617,12 @@ var HabitList = function HabitList(props) {
       ' Habit List '
     ),
     props.habitlist.map(function (habit) {
-      return _react2.default.createElement(_HabitEntry2.default, { key: habit, habit: habit });
+      return _react2.default.createElement(_HabitEntry2.default, {
+        key: habit,
+        habit: habit,
+        toggleCompleted: props.toggleCompleted,
+        isCompleted: props.isCompleted
+      });
     })
   );
 };
@@ -19916,7 +19920,17 @@ var HabitEntry = function HabitEntry(props) {
   return _react2.default.createElement(
     'div',
     null,
-    props.habit
+    props.habit,
+    props.isCompleted ? _react2.default.createElement(
+      'button',
+      { onClick: props.toggleCompleted },
+      ' YES '
+    ) : _react2.default.createElement(
+      'button',
+      { onClick: props.toggleCompleted },
+      ' NO '
+    ),
+    console.log(props.isCompleted)
   );
 };
 
@@ -19968,10 +19982,11 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      habits: []
-      // isChecked: false
+      habits: [],
+      isCompleted: false
     };
     _this.handleAddHabit = _this.handleAddHabit.bind(_this);
+    _this.toggleCompleted = _this.toggleCompleted.bind(_this);
     return _this;
   }
 
@@ -19999,6 +20014,13 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'toggleCompleted',
+    value: function toggleCompleted() {
+      this.setState({
+        isCompleted: !this.state.isCompleted
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -20010,7 +20032,7 @@ var App = function (_React$Component) {
           'Habit Tracker'
         ),
         _react2.default.createElement(_AddHabit2.default, { handleAddHabit: this.handleAddHabit }),
-        _react2.default.createElement(_HabitList2.default, { habitlist: this.state.habits })
+        _react2.default.createElement(_HabitList2.default, { habitlist: this.state.habits, toggleCompleted: this.toggleCompleted, isCompleted: this.state.isCompleted })
       );
     }
   }]);
