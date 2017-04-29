@@ -11,21 +11,23 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var habitSchema = mongoose.Schema({
+  habit: String,
+  isCompleted: Boolean  
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Habit = mongoose.model('Habit', habitSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Habit.find({}, function(err, habits) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, habits);
     }
   });
 };
 
+
+module.exports = Habit;
 module.exports.selectAll = selectAll;

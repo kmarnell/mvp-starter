@@ -14,11 +14,32 @@ class App extends React.Component {
     }
     this.handleAddHabit = this.handleAddHabit.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+    this.insertHabit = this.insertHabit.bind(this);
 
   }
 
+  insertHabit(habit) {
+    console.log("habit was entered!")
+
+    $.ajax({
+      type: 'POST', 
+      url: '/habits',
+      contentType: 'application.json',
+      data: JSON.stringify({habit: habit})
+    })
+    .done((data) => {
+      console.log('success!')
+      this.setState({habits: data})
+    })
+    .fail(function(err) {
+      console.log('there was an error with POST', err);
+    })
+  }
+  
+
   // componentDidMount() {
   //   $.ajax({
+  //     type: 'GET', 
   //     url: '/habits', 
   //     success: (data) => {
   //       this.setState({
@@ -37,6 +58,8 @@ class App extends React.Component {
       habits: this.state.habits.concat(habit)
     
     })
+
+    this.insertHabit(habit);
   }
 
 
@@ -46,7 +69,6 @@ class App extends React.Component {
     this.setState({
       habits: newHabits 
     });
-    console.log(newHabits)
   }
  
 

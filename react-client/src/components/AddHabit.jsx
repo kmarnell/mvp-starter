@@ -25,7 +25,7 @@ class AddHabit extends React.Component {
     return (
        <form> 
           <input value={this.state.value} onChange={this.handleChange} type="text"/>
-          <button onClick={this.handleSubmit}>Create</button>
+          <button onClick={this.handleSubmit}><i className="fa fa-plus" aria-hidden="true"></i></button>
         </form>
       );
   }
