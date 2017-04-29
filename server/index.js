@@ -4,20 +4,19 @@ var Habit = require('../database-mongo');
 
 var app = express();
 
-app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + '/../react-client/dist'));
+
 
 
 app.post('/habits', function (req, res) {
-  
-  var habit = req.body.habit
  
- 	console.log(req.body) 
   console.log("inside server post!")
   
   //create schema instance 
   var saveHabit = new Habit({
-  	habit: req.body.habit,
+  	habit: req.body.value, 
     isCompleted: req.body.isCompleted
   }) 
   //save to database
@@ -25,12 +24,10 @@ app.post('/habits', function (req, res) {
   	if(err) {
   		console.log('err storing to database');
   	} else {
-  		var dataArray = [];
   		console.log('saved to database!');
-  		dataArray.push(data);
+  		res.send(data);
   	}
   })
-  res.send(dataArray)
 });
 
 

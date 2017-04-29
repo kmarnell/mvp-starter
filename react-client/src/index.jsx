@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = { 
       habits: []
     }
+
     this.handleAddHabit = this.handleAddHabit.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.insertHabit = this.insertHabit.bind(this);
@@ -24,16 +25,17 @@ class App extends React.Component {
     $.ajax({
       type: 'POST', 
       url: '/habits',
-      contentType: 'application.json',
-      data: JSON.stringify({habit: habit})
+      contentType: 'application/json',
+      data: JSON.stringify(habit)
     })
     .done((data) => {
       console.log('success!')
-      this.setState({habits: data})
+      this.setState(habit: data)
     })
     .fail(function(err) {
       console.log('there was an error with POST', err);
     })
+
   }
   
 
