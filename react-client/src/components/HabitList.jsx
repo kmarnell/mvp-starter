@@ -10,6 +10,7 @@ const HabitList = (props) => (
     	habit={habit.value}
     	toggleCompleted={props.toggleCompleted} 
     	isCompleted={habit.isCompleted}
+        
 
     />)}
   </ul>

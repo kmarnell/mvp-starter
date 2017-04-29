@@ -31,15 +31,29 @@ app.post('/habits', function (req, res) {
 });
 
 
-// app.get('/habits', function (req, res) {
-//   habits.selectAll(function(err, data) {
+app.get('/habits', function(req, res) {
+	Habit.find({}).exec(function(err, data) {
+		if(err) {
+			console.log(err);
+		} else {
+			res.writeHead(200, {"Content-Type": "text/plain"});
+			res.write(JSON.stringify(data));
+			res.end();
+		}
+	})
+})
+
+// app.get('/habits/test', function (req, res) {
+//   Habit.selectAll(function(err, data) {
 //     if(err) {
 //       res.sendStatus(500);
 //     } else {
 //       res.json(data);
+//       res.end();
 //     }
 //   });
 // });
+
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

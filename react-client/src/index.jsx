@@ -16,11 +16,13 @@ class App extends React.Component {
     this.handleAddHabit = this.handleAddHabit.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.insertHabit = this.insertHabit.bind(this);
+    this.componentDidMount = this.componentDidMount(this);
 
   }
 
   insertHabit(habit) {
     console.log("habit was entered!")
+    var context = this;
 
     $.ajax({
       type: 'POST', 
@@ -30,29 +32,43 @@ class App extends React.Component {
     })
     .done((data) => {
       console.log('success!')
-      this.setState(habit: data)
+      context.setState(habit: data)
     })
     .fail(function(err) {
       console.log('there was an error with POST', err);
     })
 
+
+    $.ajax({
+      type: 'GET',
+      url: '/habits',
+      contentType: 'application/json'
+    })
+    .done((data) => {
+      console.log('success', data);
+      context.setState({habit: data});
+    })
+    .fail((err) => {
+      console.log('There was an error!', err);
+    })
   }
   
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     type: 'GET', 
-  //     url: '/habits', 
-  //     success: (data) => {
-  //       this.setState({
-  //         habits: data
-  //       })
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    var context = this;
+    $.ajax({
+      type: 'GET', 
+      url: '/habits'
+    })
+    .done((data) => {
+      console.log("DATA", data);
+      context.setState({habit: data});
+    })
+    .fail((err) => {
+      console.log('There was an error!', err);
+    })
+
+  }
 
   
   handleAddHabit(habit) {
