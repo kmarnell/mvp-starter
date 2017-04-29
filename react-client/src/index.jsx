@@ -10,11 +10,11 @@ class App extends React.Component {
     super(props);
 
     this.state = { 
-      habits: [],
-      isCompleted: false,
+      habits: []
     }
     this.handleAddHabit = this.handleAddHabit.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+
   }
 
   // componentDidMount() {
@@ -33,17 +33,20 @@ class App extends React.Component {
 
   
   handleAddHabit(habit) {
-    var habitArr = [habit]
     this.setState({
-      habits: this.state.habits.concat(habitArr)
+      habits: this.state.habits.concat(habit)
+    
     })
   }
 
 
-  toggleCompleted() {
+  toggleCompleted(index) {
+    const newHabits = this.state.habits.slice();
+    newHabits[index].isCompleted = !newHabits[index].isCompleted;
     this.setState({
-      isCompleted: !this.state.isCompleted
+      habits: newHabits 
     });
+    console.log(newHabits)
   }
  
 
@@ -55,5 +58,8 @@ class App extends React.Component {
     </div>)
   }
 }
+
+
+
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -9563,7 +9563,7 @@ var AddHabit = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      this.props.handleAddHabit(this.state.value);
+      this.props.handleAddHabit({ value: this.state.value, isCompleted: false });
     }
   }, {
     key: 'render',
@@ -9616,12 +9616,13 @@ var HabitList = function HabitList(props) {
       null,
       ' Habit List '
     ),
-    props.habitlist.map(function (habit) {
+    props.habitlist.map(function (habit, index) {
       return _react2.default.createElement(_HabitEntry2.default, {
-        key: habit,
-        habit: habit,
+        index: index,
+        habit: habit.value,
         toggleCompleted: props.toggleCompleted,
-        isCompleted: props.isCompleted
+        isCompleted: habit.isCompleted
+
       });
     })
   );
@@ -19923,11 +19924,11 @@ var HabitEntry = function HabitEntry(props) {
     props.habit,
     props.isCompleted ? _react2.default.createElement(
       'button',
-      { onClick: props.toggleCompleted },
+      { onClick: props.toggleCompleted.bind(null, props.index) },
       ' YES '
     ) : _react2.default.createElement(
       'button',
-      { onClick: props.toggleCompleted },
+      { onClick: props.toggleCompleted.bind(null, props.index) },
       ' NO '
     ),
     console.log(props.isCompleted)
@@ -19935,6 +19936,21 @@ var HabitEntry = function HabitEntry(props) {
 };
 
 exports.default = HabitEntry;
+
+// class HabitEntry extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {
+
+// 		}
+// 	}
+
+// 	render() {
+// 		return()
+// 	}
+
+
+//}
 
 /***/ }),
 /* 86 */
@@ -19982,11 +19998,11 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      habits: [],
-      isCompleted: false
+      habits: []
     };
     _this.handleAddHabit = _this.handleAddHabit.bind(_this);
     _this.toggleCompleted = _this.toggleCompleted.bind(_this);
+
     return _this;
   }
 
@@ -20008,17 +20024,20 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'handleAddHabit',
     value: function handleAddHabit(habit) {
-      var habitArr = [habit];
       this.setState({
-        habits: this.state.habits.concat(habitArr)
+        habits: this.state.habits.concat(habit)
+
       });
     }
   }, {
     key: 'toggleCompleted',
-    value: function toggleCompleted() {
+    value: function toggleCompleted(index) {
+      var newHabits = this.state.habits.slice();
+      newHabits[index].isCompleted = !newHabits[index].isCompleted;
       this.setState({
-        isCompleted: !this.state.isCompleted
+        habits: newHabits
       });
+      console.log(newHabits);
     }
   }, {
     key: 'render',
