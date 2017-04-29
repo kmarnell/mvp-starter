@@ -18,16 +18,5 @@ var habitSchema = mongoose.Schema({
 
 var Habit = mongoose.model('Habit', habitSchema);
 
-// var selectAll = function(callback) {
-//   Habit.find({}, function(err, habits) {
-//     if(err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, habits);
-//     }
-//   });
-// };
-
 
 module.exports = Habit;
-//module.exports.selectAll = selectAll;

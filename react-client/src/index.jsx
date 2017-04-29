@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   insertHabit(habit) {
-    console.log("habit was entered!")
     var context = this;
 
     $.ajax({
@@ -33,6 +32,7 @@ class App extends React.Component {
     .done((data) => {
       console.log('success!')
       context.setState(habit: data)
+      console.log(context.state, "POST STATE INSIDE INSERTHABIT")
     })
     .fail(function(err) {
       console.log('there was an error with POST', err);
@@ -47,6 +47,7 @@ class App extends React.Component {
     .done((data) => {
       console.log('success', data);
       context.setState({habit: data});
+      console.log(context.state, "GET STATE INSIDE INSERTHABIT")
     })
     .fail((err) => {
       console.log('There was an error!', err);
@@ -63,6 +64,7 @@ class App extends React.Component {
     .done((data) => {
       console.log("DATA", data);
       context.setState({habit: data});
+      console.log("GET STATE INSIDE COMPONENT-DID-MOUNT", context.state)
     })
     .fail((err) => {
       console.log('There was an error!', err);
