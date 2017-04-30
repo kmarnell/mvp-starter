@@ -21,6 +21,7 @@ app.post('/habits', function (req, res) {
   	if(err) {
   		console.log('err storing to database');
   	} else {
+  		console.log("DATA WithiN SAVE", data)
   		res.send(data);
   	}
   })
@@ -32,9 +33,10 @@ app.get('/habits', function(req, res) {
 		if(err) {
 			console.log(err);
 		} else {
-			res.writeHead(200, {"Content-Type": "text/plain"});
-			res.write(JSON.stringify(data));
-			res.end();
+			// res.writeHead(200, {"Content-Type": "text/plain"});
+			//console.log(data, "DATA INSIDE WRITE")
+			// res.write(JSON.stringify(data));
+			res.json(data);
 		}
 	})
 })

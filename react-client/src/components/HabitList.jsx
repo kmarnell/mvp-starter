@@ -7,10 +7,10 @@ const HabitList = (props) => (
     {props.habitlist.map((habit, index) => 
     <HabitEntry 
     	index={index}
-    	habit={habit.value}
+    	habit={habit.habit}
     	toggleCompleted={props.toggleCompleted} 
     	isCompleted={habit.isCompleted}
-        
+        deleteHabit={props.deleteHabit}
 
     />)}
   </ul>

@@ -10,15 +10,35 @@ class App extends React.Component {
     super(props);
 
     this.state = { 
-      habits: []
+      habit: []
     }
 
     this.handleAddHabit = this.handleAddHabit.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.insertHabit = this.insertHabit.bind(this);
     this.componentDidMount = this.componentDidMount(this);
+    this.fetchHabits = this.fetchHabits.bind(this);
+    this.deleteHabit = this.deleteHabit.bind(this);
 
   }
+
+  fetchHabits() {
+    var context = this;
+    $.ajax({
+      type: 'GET',
+      url: '/habits',
+      contentType: 'application/json'
+     })
+    .done((data) => {
+     console.log('success', data);
+     context.setState({habit: data});
+     console.log("GET STATE INSIDE insertHabit", context.state)
+   })
+    .fail((err) => {
+     console.log('There was an error!', err);
+    })
+  }
+
 
   insertHabit(habit) {
     var context = this;
@@ -31,51 +51,23 @@ class App extends React.Component {
     })
     .done((data) => {
       console.log('success!')
-      context.setState(habit: data)
-      console.log(context.state, "POST STATE INSIDE INSERTHABIT")
+      this.fetchHabits();      
     })
     .fail(function(err) {
       console.log('there was an error with POST', err);
     })
-
-
-    $.ajax({
-      type: 'GET',
-      url: '/habits',
-      contentType: 'application/json'
-    })
-    .done((data) => {
-      console.log('success', data);
-      context.setState({habit: data});
-      console.log(context.state, "GET STATE INSIDE INSERTHABIT")
-    })
-    .fail((err) => {
-      console.log('There was an error!', err);
-    })
   }
-  
+
+
 
   componentDidMount() {
-    var context = this;
-    $.ajax({
-      type: 'GET', 
-      url: '/habits'
-    })
-    .done((data) => {
-      console.log("DATA", data);
-      context.setState({habit: data});
-      console.log("GET STATE INSIDE COMPONENT-DID-MOUNT", context.state)
-    })
-    .fail((err) => {
-      console.log('There was an error!', err);
-    })
-
+    this.fetchHabits();
   }
 
   
   handleAddHabit(habit) {
     this.setState({
-      habits: this.state.habits.concat(habit)
+      habit: this.state.habit.concat(habit)
     
     })
 
@@ -83,8 +75,15 @@ class App extends React.Component {
   }
 
 
+  deleteHabit(index) {
+    var newHabits = this.state.habit.slice();
+    newHabits.splice(index, 1);
+    this.setState({habit: newHabits});
+  }
+
+
   toggleCompleted(index) {
-    const newHabits = this.state.habits.slice();
+    const newHabits = this.state.habit.slice();
     newHabits[index].isCompleted = !newHabits[index].isCompleted;
     this.setState({
       habits: newHabits 
@@ -96,7 +95,7 @@ class App extends React.Component {
     return (<div>
       <h1>Habit Tracker</h1>
       <AddHabit handleAddHabit={this.handleAddHabit} />
-      <HabitList habitlist={this.state.habits} toggleCompleted={this.toggleCompleted} isCompleted={this.state.isCompleted}/>
+      <HabitList habitlist={this.state.habit} toggleCompleted={this.toggleCompleted} isCompleted={this.state.isCompleted} deleteHabit={this.deleteHabit} />
     </div>)
   }
 }
