@@ -92,10 +92,16 @@ class App extends React.Component {
  
 
   render () {
-    return (<div>
-      <h1>Habit Tracker</h1>
-      <AddHabit handleAddHabit={this.handleAddHabit} />
-      <HabitList habitlist={this.state.habit} toggleCompleted={this.toggleCompleted} isCompleted={this.state.isCompleted} deleteHabit={this.deleteHabit} />
+
+    return (
+    <div>
+      <h1>Create Better Habits</h1>
+      <AddHabit  handleAddHabit={this.handleAddHabit}  />
+      <HabitList habitlist={this.state.habit} 
+                 toggleCompleted={this.toggleCompleted} 
+                 isCompleted={this.state.isCompleted} 
+                 deleteHabit={this.deleteHabit} />
+
     </div>)
   }
 }

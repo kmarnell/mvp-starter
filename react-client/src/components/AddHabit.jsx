@@ -18,6 +18,7 @@ class AddHabit extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.handleAddHabit({value: this.state.value, isCompleted: false})
+    this.setState({value: ''})
   }
 
 
