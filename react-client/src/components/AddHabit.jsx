@@ -1,5 +1,10 @@
 import React from 'react';
 
+const inputStyle = {
+  borderRadius: 3
+  
+}
+
 class AddHabit extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +30,7 @@ class AddHabit extends React.Component {
   render() {
     return (
        <form> 
-          <input value={this.state.value} onChange={this.handleChange} type="text"/>
+          <input style={inputStyle} value={this.state.value} onChange={this.handleChange} type="text"/>
           <button onClick={this.handleSubmit}><i className="fa fa-plus" aria-hidden="true"></i></button>
         </form>
       );

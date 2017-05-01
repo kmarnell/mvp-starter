@@ -4,6 +4,9 @@ import $ from 'jquery';
 import AddHabit from './components/AddHabit.jsx';
 import HabitList from './components/HabitList.jsx';
 
+const headerStyle = {
+  fontFamily:"Trebuchet MS"
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -95,7 +98,7 @@ class App extends React.Component {
 
     return (
     <div>
-      <h1>Create Better Habits</h1>
+      <h1 style={headerStyle}>Create Better Habits</h1>
       <AddHabit  handleAddHabit={this.handleAddHabit}  />
       <HabitList habitlist={this.state.habit} 
                  toggleCompleted={this.toggleCompleted} 
