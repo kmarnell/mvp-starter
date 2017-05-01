@@ -22,26 +22,31 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  Anyone and everyone!
+  Anyone and everyone! 
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  Create a list of habits you'd like to establish and keep yourself accountable 
+  Create a list of habits you'd like to establish and keep yourself accountable.
 
 ## Problem ##
   > Describe the problem your product solves.
+  The Habit-Tracker allows individuals to set goals for themselves and track their progress.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  Individuals can add habits they'd like to establish and check off their progress throughout the day.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  "Simple app to make everyday habits simpler"
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Just add a habit you'd like to add into your everyday life and get started!
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "The app encourages me to implement more positive habits in my life."
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
